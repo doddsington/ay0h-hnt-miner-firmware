@@ -1,13 +1,13 @@
 version: '2.4'
 services:
   gateway-config:
-    image: 'nebraltd/hm-config:3a4f009'
+    image: 'nebraltd/hm-config:45dbb32'
     depends_on:
       - dbus-session
       - diagnostics
     environment:
-      FIRMWARE_VERSION: 2022.12.13.0-23
-      FIRMWARE_SHORT_HASH: 2bfa409
+      FIRMWARE_VERSION: 2022.12.13.0-24
+      FIRMWARE_SHORT_HASH: 294f011
       DBUS_SYSTEM_BUS_ADDRESS: 'unix:path=/host/run/dbus/system_bus_socket'
       DBUS_SESSION_BUS_ADDRESS: 'unix:path=/session/dbus/session_bus_socket'
     privileged: true
@@ -23,7 +23,7 @@ services:
       io.balena.features.dbus: '1'
     stop_signal: SIGINT
   packet-forwarder:
-    image: 'nebraltd/hm-pktfwd:90ca802'
+    image: 'nebraltd/hm-pktfwd:adf7bd5'
     depends_on:
       - multiplexer
     restart: always
@@ -32,13 +32,13 @@ services:
       - 'pktfwdr:/var/pktfwd'
       - 'nebra:/var/nebra'
     environment:
-      FIRMWARE_VERSION: 2022.12.13.0-23
-      FIRMWARE_SHORT_HASH: 2bfa409
+      FIRMWARE_VERSION: 2022.12.13.0-24
+      FIRMWARE_SHORT_HASH: 294f011
     labels:
       io.balena.features.sysfs: '1'
       io.balena.features.procfs: '1'
   multiplexer:
-    image: 'nebraltd/hm-pktmux:34009b7'
+    image: 'nebraltd/hm-pktmux:eb8c757'
     restart: always
     depends_on:
       - helium-miner
@@ -69,16 +69,16 @@ services:
     restart: on-failure
     environment:
       DBUS_SYSTEM_BUS_ADDRESS: 'unix:path=/session/dbus/session_bus_socket'
-      FIRMWARE_VERSION: 2022.12.13.0-23
-      FIRMWARE_SHORT_HASH: 2bfa409
+      FIRMWARE_VERSION: 2022.12.13.0-24
+      FIRMWARE_SHORT_HASH: 294f011
   diagnostics:
-    image: 'nebraltd/hm-diag:16c3e81'
+    image: 'nebraltd/hm-diag:9265285'
     depends_on:
       - dbus-session
     environment:
-      FIRMWARE_VERSION: 2022.12.13.0-23
-      FIRMWARE_SHORT_HASH: 2bfa409
-      DIAGNOSTICS_VERSION: 16c3e81
+      FIRMWARE_VERSION: 2022.12.13.0-24
+      FIRMWARE_SHORT_HASH: 294f011
+      DIAGNOSTICS_VERSION: 9265285
       DBUS_SYSTEM_BUS_ADDRESS: 'unix:path=/host/run/dbus/system_bus_socket'
     volumes:
       - 'pktfwdr:/var/pktfwd'
@@ -108,8 +108,8 @@ services:
       - 'dbus:/session/dbus'
     environment:
       DBUS_ADDRESS: 'unix:path=/session/dbus/session_bus_socket'
-      FIRMWARE_VERSION: 2022.12.13.0-23
-      FIRMWARE_SHORT_HASH: 2bfa409
+      FIRMWARE_VERSION: 2022.12.13.0-24
+      FIRMWARE_SHORT_HASH: 294f011
 volumes:
   miner-storage: {}
   miner-log: {}
